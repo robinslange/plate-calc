@@ -84,12 +84,9 @@ export default {
   }),
   methods: {
     isInteger(value) {
-      console.log("value = " + value);
       if (undefined === value || null === value) {
-        console.log("Is integer: " + false);
         return false;
       }
-      console.log("Is integer: " + true);
       return value % 1 == 0;
     },
     calculate() {
@@ -108,105 +105,28 @@ export default {
         return 0;
       }
 
-      let i = 0;
-
-      //TODO: 25 KG PLATE
-      //first checks if can use 25kg plates only, if so finishes there with return;
-      if (this.isInteger(roundedNum / this.plates[i].weight)) {
-        this.plates[i].count = roundedNum / this.plates[i].weight;
-        return 0;
-      } //if number isn't an int i.e is float then...
-      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
-        //if the number is > 0 but a float e.g. 2.3 then...
-        if (roundedNum / this.plates[i].weight > 0) {
-          // remove decimal, add int to count at position i
-          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
-          // remove already calc'd amount from total
-          roundedNum =
-            roundedNum - this.plates[i].count * this.plates[i].weight;
+      this.math(roundedNum);
+    },
+    math(roundedNum) {
+      for (let i = 0; i < 5; i++) {
+        //first checks if can use 25kg plates only, if so finishes there with return;
+        if (this.isInteger(roundedNum / this.plates[i].weight)) {
+          this.plates[i].count = roundedNum / this.plates[i].weight;
+          return 0;
+        } //if number isn't an int i.e is float then...
+        else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
+          //if the number is > 0 but a float e.g. 2.3 then...
+          if (roundedNum / this.plates[i].weight > 0) {
+            // remove decimal, add int to count at position i
+            this.plates[i].count = Math.floor(
+              roundedNum / this.plates[i].weight
+            );
+            // remove already calc'd amount from total
+            roundedNum =
+              roundedNum - this.plates[i].count * this.plates[i].weight;
+          }
         }
       }
-      i++;
-      //TODO: 20 KG PLATE
-      if (this.isInteger(roundedNum / this.plates[i].weight)) {
-        this.plates[i].count = roundedNum / this.plates[i].weight;
-        return 0;
-      } //if number isn't an int i.e is float then...
-      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
-        //if the number is > 0 but a float e.g. 2.3 then...
-        if (roundedNum / this.plates[i].weight > 0) {
-          // remove decimal, add int to count at position i
-          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
-          // remove already calc'd amount from total
-          roundedNum =
-            roundedNum - this.plates[i].count * this.plates[i].weight;
-        }
-      }
-      i++;
-      //TODO: 15 KG PLATE
-      if (this.isInteger(roundedNum / this.plates[i].weight)) {
-        this.plates[i].count = roundedNum / this.plates[i].weight;
-        return 0;
-      } //if number isn't an int i.e is float then...
-      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
-        //if the number is > 0 but a float e.g. 2.3 then...
-        if (roundedNum / this.plates[i].weight > 0) {
-          // remove decimal, add int to count at position i
-          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
-          // remove already calc'd amount from total
-          roundedNum =
-            roundedNum - this.plates[i].count * this.plates[i].weight;
-        }
-      }
-      i++;
-      //TODO: 10 KG PLATE
-      if (this.isInteger(roundedNum / this.plates[i].weight)) {
-        this.plates[i].count = roundedNum / this.plates[i].weight;
-        return 0;
-      } //if number isn't an int i.e is float then...
-      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
-        //if the number is > 0 but a float e.g. 2.3 then...
-        if (roundedNum / this.plates[i].weight > 0) {
-          // remove decimal, add int to count at position i
-          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
-          // remove already calc'd amount from total
-          roundedNum =
-            roundedNum - this.plates[i].count * this.plates[i].weight;
-        }
-      }
-      i++;
-      //TODO: 5 KG PLATE
-      if (this.isInteger(roundedNum / this.plates[i].weight)) {
-        this.plates[i].count = roundedNum / this.plates[i].weight;
-        return 0;
-      } //if number isn't an int i.e is float then...
-      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
-        //if the number is > 0 but a float e.g. 2.3 then...
-        if (roundedNum / this.plates[i].weight > 0) {
-          // remove decimal, add int to count at position i
-          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
-          // remove already calc'd amount from total
-          roundedNum =
-            roundedNum - this.plates[i].count * this.plates[i].weight;
-        }
-      }
-      i++;
-      //TODO: 2.5 KG PLATE
-      if (this.isInteger(roundedNum / this.plates[i].weight)) {
-        this.plates[i].count = roundedNum / this.plates[i].weight;
-        return 0;
-      } //if number isn't an int i.e is float then...
-      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
-        //if the number is > 0 but a float e.g. 2.3 then...
-        if (roundedNum / this.plates[i].weight > 0) {
-          // remove decimal, add int to count at position i
-          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
-          // remove already calc'd amount from total
-          roundedNum =
-            roundedNum - this.plates[i].count * this.plates[i].weight;
-        }
-      }
-      i++;
     },
   },
 };

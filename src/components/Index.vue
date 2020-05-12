@@ -1,0 +1,225 @@
+<template>
+  <v-container>
+    <v-card class="mx-auto">
+      <v-col>
+        <v-row class="heading">Plate Calculator</v-row>
+        <v-row dense>
+          <v-form>
+            <v-text-field v-model="barWeight" label="Bar Weight"></v-text-field>
+            <v-text-field
+              v-model="totalWeight"
+              label="Total Weight"
+            ></v-text-field>
+            <v-btn text @click="calculate" class="ma-2">Calculate</v-btn>
+            <v-switch
+              v-model="roundUp"
+              class="ma-2"
+              label="Round Up"
+            ></v-switch>
+          </v-form>
+        </v-row>
+        <v-col>
+          <v-subheader>Plates per side: </v-subheader>
+
+          <v-row class="results">
+            <v-simple-table v-for="plate in plates" :key="plate.weight">
+              <thead>
+                <tr>
+                  <th>{{ plate.type }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ plate.count }}</td>
+                </tr>
+              </tbody>
+            </v-simple-table>
+          </v-row>
+        </v-col>
+      </v-col>
+    </v-card>
+  </v-container>
+</template>
+
+<script>
+export default {
+  name: "Index",
+
+  data: () => ({
+    barWeight: 0,
+    totalWeight: 0,
+    roundUp: false,
+    plates: [
+      {
+        type: "25kg Plate",
+        weight: 25,
+        count: 0,
+      },
+      {
+        type: "20kg Plate",
+        weight: 20,
+        count: 0,
+      },
+      {
+        type: "15kg Plate",
+        weight: 15,
+        count: 0,
+      },
+      {
+        type: "10kg Plate",
+        weight: 10,
+        count: 0,
+      },
+      {
+        type: "5kg Plate",
+        weight: 5,
+        count: 0,
+      },
+      {
+        type: "2.5kg Plate",
+        weight: 2.5,
+        count: 0,
+      },
+    ],
+  }),
+  methods: {
+    isInteger(value) {
+      console.log("value = " + value);
+      if (undefined === value || null === value) {
+        console.log("Is integer: " + false);
+        return false;
+      }
+      console.log("Is integer: " + true);
+      return value % 1 == 0;
+    },
+    calculate() {
+      let calcNum = (parseInt(this.totalWeight) - parseInt(this.barWeight)) / 2;
+      //if number is 0 then finish here
+      if (calcNum == 0) return;
+      let roundedNum = 0;
+      if (this.roundUp) {
+        roundedNum = Math.ceil(calcNum / 2.5) * 2.5;
+      } else {
+        roundedNum = Math.floor(calcNum / 2.5) * 2.5;
+      }
+      if (roundedNum <= 80 && this.isInteger(roundedNum / 20)) {
+        console.log("it's a 20 divisible number: " + roundedNum);
+        this.plates[1].count = roundedNum / 20;
+        return 0;
+      }
+
+      let i = 0;
+
+      //TODO: 25 KG PLATE
+      //first checks if can use 25kg plates only, if so finishes there with return;
+      if (this.isInteger(roundedNum / this.plates[i].weight)) {
+        this.plates[i].count = roundedNum / this.plates[i].weight;
+        return 0;
+      } //if number isn't an int i.e is float then...
+      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
+        //if the number is > 0 but a float e.g. 2.3 then...
+        if (roundedNum / this.plates[i].weight > 0) {
+          // remove decimal, add int to count at position i
+          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
+          // remove already calc'd amount from total
+          roundedNum =
+            roundedNum - this.plates[i].count * this.plates[i].weight;
+        }
+      }
+      i++;
+      //TODO: 20 KG PLATE
+      if (this.isInteger(roundedNum / this.plates[i].weight)) {
+        this.plates[i].count = roundedNum / this.plates[i].weight;
+        return 0;
+      } //if number isn't an int i.e is float then...
+      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
+        //if the number is > 0 but a float e.g. 2.3 then...
+        if (roundedNum / this.plates[i].weight > 0) {
+          // remove decimal, add int to count at position i
+          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
+          // remove already calc'd amount from total
+          roundedNum =
+            roundedNum - this.plates[i].count * this.plates[i].weight;
+        }
+      }
+      i++;
+      //TODO: 15 KG PLATE
+      if (this.isInteger(roundedNum / this.plates[i].weight)) {
+        this.plates[i].count = roundedNum / this.plates[i].weight;
+        return 0;
+      } //if number isn't an int i.e is float then...
+      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
+        //if the number is > 0 but a float e.g. 2.3 then...
+        if (roundedNum / this.plates[i].weight > 0) {
+          // remove decimal, add int to count at position i
+          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
+          // remove already calc'd amount from total
+          roundedNum =
+            roundedNum - this.plates[i].count * this.plates[i].weight;
+        }
+      }
+      i++;
+      //TODO: 10 KG PLATE
+      if (this.isInteger(roundedNum / this.plates[i].weight)) {
+        this.plates[i].count = roundedNum / this.plates[i].weight;
+        return 0;
+      } //if number isn't an int i.e is float then...
+      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
+        //if the number is > 0 but a float e.g. 2.3 then...
+        if (roundedNum / this.plates[i].weight > 0) {
+          // remove decimal, add int to count at position i
+          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
+          // remove already calc'd amount from total
+          roundedNum =
+            roundedNum - this.plates[i].count * this.plates[i].weight;
+        }
+      }
+      i++;
+      //TODO: 5 KG PLATE
+      if (this.isInteger(roundedNum / this.plates[i].weight)) {
+        this.plates[i].count = roundedNum / this.plates[i].weight;
+        return 0;
+      } //if number isn't an int i.e is float then...
+      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
+        //if the number is > 0 but a float e.g. 2.3 then...
+        if (roundedNum / this.plates[i].weight > 0) {
+          // remove decimal, add int to count at position i
+          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
+          // remove already calc'd amount from total
+          roundedNum =
+            roundedNum - this.plates[i].count * this.plates[i].weight;
+        }
+      }
+      i++;
+      //TODO: 2.5 KG PLATE
+      if (this.isInteger(roundedNum / this.plates[i].weight)) {
+        this.plates[i].count = roundedNum / this.plates[i].weight;
+        return 0;
+      } //if number isn't an int i.e is float then...
+      else if (!this.isInteger(roundedNum / this.plates[i].weight)) {
+        //if the number is > 0 but a float e.g. 2.3 then...
+        if (roundedNum / this.plates[i].weight > 0) {
+          // remove decimal, add int to count at position i
+          this.plates[i].count = Math.floor(roundedNum / this.plates[i].weight);
+          // remove already calc'd amount from total
+          roundedNum =
+            roundedNum - this.plates[i].count * this.plates[i].weight;
+        }
+      }
+      i++;
+    },
+  },
+};
+</script>
+
+<style>
+.v-card {
+  max-width: 60% !important;
+}
+.row {
+  padding-left: 2%;
+}
+.v-simple-table {
+  text-align: center;
+}
+</style>

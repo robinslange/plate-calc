@@ -95,7 +95,13 @@ export default {
       }
       return value % 1 == 0;
     },
+    reset() {
+      for (let i = 0; i < 5; i++) {
+        this.plates[i].count = 0;
+      }
+    },
     calculate() {
+      this.reset();
       let calcNum = (parseInt(this.totalWeight) - parseInt(this.barWeight)) / 2;
       //if number is 0 then finish here
       if (calcNum == 0) return;

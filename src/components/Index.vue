@@ -104,21 +104,15 @@ export default {
       this.reset();
       let calcNum = (parseInt(this.totalWeight) - parseInt(this.barWeight)) / 2;
       //if number is 0 then finish here
-      if (calcNum == 0) return;
+      if (calcNum <= 0) return;
       let roundedNum = 0;
-      if (this.roundUp) {
-        roundedNum = Math.ceil(calcNum / 2.5) * 2.5;
-      } else {
-        roundedNum = Math.floor(calcNum / 2.5) * 2.5;
-      }
+
       if (roundedNum <= 80 && this.isInteger(roundedNum / 20)) {
         console.log("it's a 20 divisible number: " + roundedNum);
         this.plates[1].count = roundedNum / 20;
         return 0;
       }
-      if (this.roundedNum > 0) {
-        this.math(roundedNum);
-      }
+      this.math(roundedNum);
     },
     math(roundedNum) {
       for (let i = 0; i < 5; i++) {

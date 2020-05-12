@@ -116,8 +116,9 @@ export default {
         this.plates[1].count = roundedNum / 20;
         return 0;
       }
-
-      this.math(roundedNum);
+      if (this.roundedNum > 0) {
+        this.math(roundedNum);
+      }
     },
     math(roundedNum) {
       for (let i = 0; i < 5; i++) {

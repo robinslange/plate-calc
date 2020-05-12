@@ -1,7 +1,7 @@
 <template>
   <v-layout align-start row fill-height>
     <v-container fluid>
-      <v-card class="mx-auto" cols="24">
+      <v-card class="mx-auto">
         <v-col class="math">
           <v-row class="heading">Plate Calculator</v-row>
           <v-row dense>
@@ -50,9 +50,6 @@
 <script>
 export default {
   name: "Index",
-  components: {
-    PlateRender,
-  },
 
   data: () => ({
     barWeight: 0,
@@ -143,7 +140,7 @@ export default {
 
 <style>
 .v-card {
-  max-width: 70% !important;
+  max-width: 50% !important;
 }
 .row {
   padding-left: 2%;

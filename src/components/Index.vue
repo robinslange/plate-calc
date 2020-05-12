@@ -1,49 +1,61 @@
 <template>
-  <v-container>
-    <v-card class="mx-auto">
-      <v-col>
-        <v-row class="heading">Plate Calculator</v-row>
-        <v-row dense>
-          <v-form>
-            <v-text-field v-model="barWeight" label="Bar Weight"></v-text-field>
-            <v-text-field
-              v-model="totalWeight"
-              label="Total Weight"
-            ></v-text-field>
-            <v-btn text @click="calculate" class="ma-2">Calculate</v-btn>
-            <v-switch
-              v-model="roundUp"
-              class="ma-2"
-              label="Round Up"
-            ></v-switch>
-          </v-form>
-        </v-row>
-        <v-col>
-          <v-subheader>Plates per side: </v-subheader>
-
-          <v-row class="results">
-            <v-simple-table v-for="plate in plates" :key="plate.weight">
-              <thead>
-                <tr>
-                  <th>{{ plate.type }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>{{ plate.count }}</td>
-                </tr>
-              </tbody>
-            </v-simple-table>
+  <v-layout align-start row fill-height>
+    <v-container fluid>
+      <v-card class="mx-auto" cols="24">
+        <v-col class="math">
+          <v-row class="heading">Plate Calculator</v-row>
+          <v-row dense>
+            <v-form>
+              <v-text-field
+                v-model="barWeight"
+                label="Bar Weight"
+              ></v-text-field>
+              <v-text-field
+                v-model="totalWeight"
+                label="Total Weight"
+              ></v-text-field>
+              <v-btn text @click="calculate" class="ma-2">Calculate</v-btn>
+              <v-switch
+                v-model="roundUp"
+                class="ma-2"
+                label="Round Up"
+              ></v-switch>
+            </v-form>
           </v-row>
+          <v-col>
+            <v-subheader>Plates per side: </v-subheader>
+
+            <v-row class="results">
+              <v-simple-table v-for="plate in plates" :key="plate.weight">
+                <thead>
+                  <tr>
+                    <th>{{ plate.type }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{ plate.count }}</td>
+                  </tr>
+                </tbody>
+              </v-simple-table>
+            </v-row>
+          </v-col>
+          <v-col class="plates">
+            <PlateRender plates="plates" />
+          </v-col>
         </v-col>
-      </v-col>
-    </v-card>
-  </v-container>
+      </v-card>
+    </v-container>
+  </v-layout>
 </template>
 
 <script>
+import PlateRender from "./PlateRender";
 export default {
   name: "Index",
+  components: {
+    PlateRender,
+  },
 
   data: () => ({
     barWeight: 0,
@@ -134,12 +146,17 @@ export default {
 
 <style>
 .v-card {
-  max-width: 60% !important;
+  max-width: 70% !important;
 }
 .row {
   padding-left: 2%;
 }
 .v-simple-table {
   text-align: center;
+}
+.math {
+  max-width: 50%;
+}
+.plates {
 }
 </style>

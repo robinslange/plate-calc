@@ -40,9 +40,7 @@
               </v-simple-table>
             </v-row>
           </v-col>
-          <v-col class="plates">
-            <PlateRender plates="plates" />
-          </v-col>
+          <v-col class="plates"> </v-col>
         </v-col>
       </v-card>
     </v-container>
@@ -50,7 +48,6 @@
 </template>
 
 <script>
-import PlateRender from "./PlateRender";
 export default {
   name: "Index",
   components: {
@@ -153,10 +150,5 @@ export default {
 }
 .v-simple-table {
   text-align: center;
-}
-.math {
-  max-width: 50%;
-}
-.plates {
 }
 </style>
